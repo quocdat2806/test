@@ -9,5 +9,6 @@ const AppColors = {
   gray2: '#D2D6DB',
   gray3: '#D2D6D4',
   gray4: '#A3A3A3',
+  red: '#FF0000',
 };
 export default AppColors;

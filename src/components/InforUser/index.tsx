@@ -36,7 +36,7 @@ const InfoUser = (value: TProps) => {
           <PreviousIcon />
         </Pressable>
       )}
-      <AppImage width={40} style={style.avatar} source={{uri: url}} />
+      <AppImage style={style.avatar} source={{uri: url, cache: 'immutable'}} />
       <View style={style.subInfoWrapper}>
         <AppText text={name} size={14} fontFamily="Medium" />
         <View style={style.textSubInfo}>

@@ -1,6 +1,5 @@
 /* eslint-disable react/function-component-definition */
 import React, {FC, ReactNode, useState} from 'react';
-import AutoHeightImage from 'react-native-auto-height-image';
 import FastImage, {FastImageProps} from 'react-native-fast-image';
 
 type ImageProps = FastImageProps & {
@@ -38,14 +37,6 @@ const AppImage: FC<ImageProps> = ({
       </FastImage>
     );
   }
-
-  if (width)
-    return (
-      // @ts-expect-error : missing props
-      <AutoHeightImage width={width} source={source} style={style} {...other}>
-        {children}
-      </AutoHeightImage>
-    );
 
   return (
     <FastImage

@@ -18,6 +18,7 @@ const style = StyleSheet.create({
 
   flatList: {
     overflow: 'hidden',
+    marginBottom: 100,
   },
 
   //section

@@ -17,7 +17,7 @@ const PostContent = (value: TProps) => {
       <FastImage
         resizeMode={FastImage.resizeMode.cover}
         style={style.imagePost}
-        source={{uri: url}}
+        source={{uri: url, cache: 'immutable'}}
       />
     </View>
   );

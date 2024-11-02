@@ -9,6 +9,8 @@ const style = StyleSheet.create({
   },
   avatar: {
     borderRadius: 40,
+    width: 40,
+    height: 40,
   },
   subInfoWrapper: {
     flexDirection: 'column',

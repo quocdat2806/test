@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo, useRef} from 'react';
 import {FlatList, Pressable, View, ViewStyle} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import appGlobalStyle from '../../style';
@@ -43,101 +43,145 @@ const customSectionItemStyle = (isActiveSection: boolean): ViewStyle => {
     borderColor: isActiveSection ? AppColors.black2 : AppColors.gray2,
   };
 };
+
+const PostItem = ({
+  item,
+  onClick,
+}: {
+  item: TCharacter;
+  onClick: (item: TCharacter) => void;
+}) => {
+  const rightComponentOfInput = (
+    <View style={appGlobalStyle.flexRow}>
+      <View style={style.rightComponentOfInputWrapper}>
+        <SmileEllipseIcon />
+      </View>
+      <View style={style.rightComponentOfInputWrapper}>
+        <ImageIcon02 />
+      </View>
+    </View>
+  );
+
+  return (
+    <View style={style.postItemWrapper}>
+      <Pressable onPress={() => onClick(item)}>
+        <InfoUser
+          time={item.created}
+          name={item.name}
+          specials={item.species}
+          url={item.image}
+        />
+        <PostContent url={item.image} text={loremText} />
+      </Pressable>
+      <PostItemActions />
+      <AppTextInput
+        inputWrapper={style.inputCommentWrapper}
+        inputStyle={style.inputCommentStyle}
+        placeHolder="Nhập bình luận"
+        leftComponent={<AVatar width={40} height={40} />}
+        rightComponent={rightComponentOfInput}
+      />
+    </View>
+  );
+};
+
+const SectionItem = ({
+  item,
+  currentIndexSection,
+  onClick,
+}: {
+  item: TCategory;
+  currentIndexSection: number;
+  onClick: (id: number) => void;
+}) => {
+  const isActiveSection = item.id === currentIndexSection;
+  const styleForSectionItem = customSectionItemStyle(isActiveSection);
+
+  return (
+    <Pressable onPress={() => onClick(item.id)}>
+      <View style={[styleForSectionItem, style.sectionView]}>
+        <AppText
+          size={10}
+          fontFamily="Medium"
+          style={{
+            color: isActiveSection ? AppColors.white : AppColors.black1,
+          }}
+          text={item.title}
+        />
+      </View>
+    </Pressable>
+  );
+};
 const Home = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-  const {currentIndexSection, response, handleTabSectionItem} = useHomeScreen();
-  const RenderSectionItem = ({item}: {item: TCategory}) => {
-    const isActiveSection = item.id === currentIndexSection;
-    const styleForSectionItem = customSectionItemStyle(isActiveSection);
-    return (
-      <Pressable onPress={() => handleTabSectionItem(item.id)}>
-        <View style={[styleForSectionItem, style.sectionView]}>
-          <AppText
-            size={10}
-            fontFamily="Medium"
-            style={{
-              color: isActiveSection ? AppColors.white : AppColors.black1,
-            }}
-            text={item.title}
-          />
-        </View>
-      </Pressable>
-    );
-  };
+  const flatListRef = useRef(true);
 
-  const RenderPostItem = ({item}: {item: TCharacter}) => {
-    const rightComponentOfInput = (
-      <View style={appGlobalStyle.flexRow}>
-        <View style={style.rightComponentOfInputWrapper}>
-          <SmileEllipseIcon />
-        </View>
-        <View style={style.rightComponentOfInputWrapper}>
-          <ImageIcon02 />
-        </View>
+  const {currentIndexSection, data, handleTabSectionItem, onEndReach} =
+    useHomeScreen();
+
+  const renderHeaderSticky = useMemo(() => {
+    return (
+      <>
+        <HomeBanner />
+        <HomeInfoGroup />
+        <HomeActions />
+      </>
+    );
+  }, []);
+  const renderFlatList = useMemo(() => {
+    return (
+      <View style={style.stickyElement}>
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          data={MockDataCategories}
+          renderItem={({item}) => (
+            <SectionItem
+              currentIndexSection={currentIndexSection}
+              item={item}
+              onClick={handleTabSectionItem}
+            />
+          )}
+          keyExtractor={keyExtractorCategory}
+        />
       </View>
     );
-
-    return (
-      <Pressable
-        onPress={() => {
-          navigation.navigate(Routes.POSTDETAIL, {
-            data: item,
-          });
-        }}>
-        <View style={style.postItemWrapper}>
-          <InfoUser
-            time={item.created}
-            name={item.name}
-            specials={item.species}
-            url={item.image}
-          />
-          <PostContent url={item.image} text={loremText} />
-          <PostItemActions />
-          <AppTextInput
-            inputWrapper={style.inputCommentWrapper}
-            inputStyle={style.inputCommentStyle}
-            placeHolder="Nhập bình luận"
-            leftComponent={<AVatar width={40} height={40} />}
-            rightComponent={rightComponentOfInput}
-          />
-        </View>
-      </Pressable>
-    );
-  };
+  }, []);
   const keyExtractorFlatList = (item: TCharacter) => item.id.toString();
   const keyExtractorCategory = (item: TCategory) => item.id.toString();
 
+  const onPostItemClick = (item: TCharacter) => {
+    navigation.navigate(Routes.POSTDETAIL, {
+      data: item,
+    });
+  };
   return (
     <SafeAreaProvider>
       <SafeAreaView style={appGlobalStyle.flex1}>
         <HomeAppBar />
         <AppFlatList
+          ref={flatListRef}
+          onEndReached={({distanceFromEnd}) => {
+            if (!flatListRef.current) {
+              onEndReach();
+              flatListRef.current = true;
+            }
+          }}
+          onMomentumScrollBegin={() => {
+            flatListRef.current = false;
+          }}
           windowSize={5}
           maxToRenderPerBatch={5}
           initialNumToRender={10}
           keyExtractor={keyExtractorFlatList}
           removeClippedSubviews={true}
-          data={response?.results ?? []}
+          data={data}
           style={style.flatList}
-          renderItem={RenderPostItem}
-          HeaderComponent={
-            <>
-              <HomeBanner />
-              <HomeInfoGroup />
-              <HomeActions />
-            </>
-          }
-          StickyElementComponent={
-            <View style={style.stickyElement}>
-              <FlatList
-                showsHorizontalScrollIndicator={false}
-                horizontal
-                data={MockDataCategories}
-                renderItem={RenderSectionItem}
-                keyExtractor={keyExtractorCategory}
-              />
-            </View>
-          }
+          renderItem={({item}) => (
+            <PostItem onClick={onPostItemClick} item={item} />
+          )}
+          HeaderComponent={renderHeaderSticky}
+          StickyElementComponent={renderFlatList}
           TopListElementComponent={
             <View style={style.topFlatListStickyElement} />
           }

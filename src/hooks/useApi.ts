@@ -7,9 +7,17 @@ interface UseApiParams<T> {
   method?: 'get' | 'post' | 'put' | 'patch';
   data?: T;
   config?: AxiosRequestConfig;
+  page?: number;
+  limit?: number;
 }
 
-const useApi = <T>({url, method = 'get', config = {}}: UseApiParams<T>) => {
+const useApi = <T>({
+  url,
+  method = 'get',
+  limit,
+  page,
+  config = {},
+}: UseApiParams<T>) => {
   const [response, setResponse] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -26,17 +34,22 @@ const useApi = <T>({url, method = 'get', config = {}}: UseApiParams<T>) => {
         default:
           apiResponse = await networkService.get<T>(url, config);
       }
-      setResponse(apiResponse.data);
+      setResponse(prevResponse =>
+        JSON.stringify(prevResponse) !== JSON.stringify(apiResponse.data)
+          ? apiResponse.data
+          : prevResponse,
+      );
     } catch (err: any) {
       setError(err.message || 'An error occurred');
     } finally {
       setLoading(false);
     }
-  }, [url, method]);
+  }, [url, limit, page, method]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
   return {response, loading, error};
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {Animated, FlatListProps, View} from 'react-native';
 import {useFlatList} from '../../hooks/useFlatList';
 
@@ -8,10 +8,10 @@ type CustomFlatListProps<T> = Omit<FlatListProps<T>, 'ListHeaderComponent'> & {
   TopListElementComponent: JSX.Element;
 };
 
-function CustomFlatList<T>({
-  style,
-  ...props
-}: CustomFlatListProps<T>): React.ReactElement {
+const CustomFlatList = forwardRef<
+  Animated.FlatList<any>,
+  CustomFlatListProps<any>
+>(({style, ...props}, ref) => {
   const [
     scrollY,
     styles,
@@ -35,6 +35,7 @@ function CustomFlatList<T>({
       </Animated.View>
 
       <Animated.FlatList<any>
+        ref={ref} // truyền ref cho FlatList
         {...props}
         ListHeaderComponent={
           <Animated.View onLayout={onLayoutHeaderElement}>
@@ -54,6 +55,6 @@ function CustomFlatList<T>({
       />
     </View>
   );
-}
+});
 
 export default CustomFlatList;

@@ -81,7 +81,7 @@ export default function AppNavigation() {
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: {
-            marginHorizontal: 12,
+            paddingHorizontal: 12,
           },
         }}
         initialRouteName={Routes.HOME}>
