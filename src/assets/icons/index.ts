@@ -1,59 +1,60 @@
-import CameraVideo from './camera_video.svg';
-import AVatar from './ic_avatar.svg';
-import CameraVideo01 from './ic_camera01.svg';
-import CameraVideo02 from './ic_camera02.svg';
-import ChatIcon from './ic_chat.svg';
-import FlagIcon from './ic_flag.svg';
-import HeartIcon from './ic_heart.svg';
-import ImageIcon from './ic_image.svg';
+import AccountStrokeIcon from './Account Stoke Icon.svg';
+import AddGroupTwoUserIcon from './ic_add_group_two_user.svg';
+import AddVideoIcon from './ic_add_video.svg';
+import AddIcon from './ic_add.svg';
+import BagIcon from './ic_bag.svg';
+import BellIcon from './ic_bell.svg';
+import BookmarkIcon from './ic_bell.svg';
+import BoxSystemIcon from './ic_book_system.svg';
+import CameraIcon from './ic_camera.svg';
+import CoinIcon from './ic_coin.svg';
+import DownIcon from './ic_down.svg';
+import Favorite1Icon from './ic_favorite_1.svg';
+import FavoriteIcon from './ic_favorite.svg';
+import GroupThreeUserIcon from './ic_group_three_user.svg';
+import HomeIcon from './ic_home.svg';
+import LightBulbIcon from './ic_light_bulb.svg';
 import LockIcon from './ic_lock.svg';
-import MessageIcon from './ic_message.svg';
+import MailIcon from './ic_mail.svg';
 import MoreIcon from './ic_more.svg';
-import PreviousIcon from './ic_previous.svg';
+import NextIcon from './ic_next.svg';
+import PlayIcon from './ic_play.svg';
 import SearchIcon from './ic_search.svg';
-import ShellCheck from './ic_shell_check.svg';
+import ShareIcon from './ic_share.svg';
 import ShoppingCartIcon from './ic_shopping_cart.svg';
-import SmileIcon from './ic_smile.svg';
-import UserProfile01Icon from './ic_user_profile01.svg';
-import UserProfile02Icon from './ic_user_profile02.svg';
-import VerifiedIcon from './ic_verified.svg';
-import VideoIcon from './ic_video.svg';
-import XIcon from './ic_x.svg';
-import ImageIcon02 from './image.svg';
-import ImageIcon03 from './image02.svg';
-import ImageIcon04 from './image03.svg';
-import LocationIcon from './location.svg';
-import SmileEllipseIcon from './smile-ellipse.svg';
-import UserAddIcon from './user-add.svg';
-import HomeIcon from './home-04.svg';
-
+import TickIcon from './ic_tick.svg';
+import UserAndAddIcon from './ic_user_and_add.svg';
+import UserIcon from './ic_user.svg';
+import MessageStrokeIcon from './Message Stroke Icon.svg';
+import SubtractIcon from './Subtract.svg';
 export {
-  CameraVideo,
-  AVatar,
-  CameraVideo01,
-  CameraVideo02,
-  ChatIcon,
-  FlagIcon,
-  HeartIcon,
-  ImageIcon,
-  LockIcon,
-  MessageIcon,
-  MoreIcon,
-  PreviousIcon,
-  SearchIcon,
-  ShellCheck,
-  ShoppingCartIcon,
-  SmileIcon,
-  UserProfile01Icon,
-  UserProfile02Icon,
-  VerifiedIcon,
-  VideoIcon,
-  XIcon,
-  ImageIcon02,
-  ImageIcon03,
-  ImageIcon04,
-  LocationIcon,
-  SmileEllipseIcon,
-  UserAddIcon,
+  AccountStrokeIcon,
+  AddGroupTwoUserIcon,
+  AddVideoIcon,
+  AddIcon,
+  BagIcon,
+  BellIcon,
+  BookmarkIcon,
+  BoxSystemIcon,
+  CameraIcon,
+  CoinIcon,
+  DownIcon,
+  Favorite1Icon,
+  FavoriteIcon,
+  GroupThreeUserIcon,
   HomeIcon,
+  LightBulbIcon,
+  LockIcon,
+  MailIcon,
+  MoreIcon,
+  NextIcon,
+  PlayIcon,
+  SearchIcon,
+  ShareIcon,
+  ShoppingCartIcon,
+  TickIcon,
+  UserAndAddIcon,
+  UserIcon,
+  MessageStrokeIcon,
+  SubtractIcon,
 };

@@ -1,14 +1,15 @@
 const AppColors = {
   white: '#ffffff',
-  blue: '#3864ff',
-  gray: '#F3F4F6',
-  gray1: '#F9FAFB',
+  primaryBlue: '#3864ff',
+  lightGray: '#F3F4F6',
+  lighterGray: '#F9FAFB',
   black: '#000000',
-  black1: '#4D5761',
-  black2: '#0D121C',
-  gray2: '#D2D6DB',
-  gray3: '#D2D6D4',
-  gray4: '#A3A3A3',
-  red: '#FF0000',
+  darkGrayBlack: '#4D5761',
+  deepBlack: '#0D121C',
+  mediumGray: '#D2D6DB',
+  mediumGrayAlt: '#D2D6D4',
+  darkGray: '#A3A3A3',
+  alertRed: '#FF0000',
 };
+
 export default AppColors;

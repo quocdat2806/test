@@ -8,36 +8,27 @@ type ImageProps = FastImageProps & {
   width?: number;
 };
 
-const AppImage: FC<ImageProps> = ({
-  source,
-  style,
-  tintColor,
-  children,
-  type,
-  width = 0,
-  ...other
-}) => {
+const AppImage: FC<ImageProps> = ({source, style, tintColor, type}) => {
   const [, setImageError] = useState({
     isError: false,
   });
 
   const sourceImage = source;
 
-  if (type === 'background') {
-    return (
-      <FastImage
-        onError={() => {
-          setImageError(prev => ({...prev, isError: true}));
-        }}
-        source={source}
-        style={style}
-        tintColor={tintColor}
-        {...other}>
-        {children}
-      </FastImage>
-    );
-  }
-
+  // if (type === 'background') {
+  //   return (
+  //     <FastImage
+  //       onError={() => {
+  //         setImageError(prev => ({...prev, isError: true}));
+  //       }}
+  //       source={source}
+  //       style={style}
+  //       tintColor={tintColor}
+  //       {...other}>
+  //       {children}
+  //     </FastImage>
+  //   );
+  // }
   return (
     <FastImage
       onError={() => {
@@ -46,7 +37,6 @@ const AppImage: FC<ImageProps> = ({
       source={sourceImage}
       tintColor={tintColor}
       style={style}
-      {...other}
     />
   );
 };

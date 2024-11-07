@@ -1,6 +1,22 @@
-import {Dimensions} from 'react-native';
+import {Platform, Dimensions, PixelRatio} from 'react-native';
 
-const WIN_WIDTH = Dimensions.get('window').width;
-const WIN_HEIGHT = Dimensions.get('window').height;
+const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
-export {WIN_HEIGHT, WIN_WIDTH};
+// base on iphone 11
+const BASE_WIDTH = 375;
+
+class FontScale {
+  static scale(size: number) {
+    const scale = SCREEN_WIDTH / BASE_WIDTH;
+    let newSize = size * scale;
+    if (Platform.OS === 'ios') {
+      return Math.round(PixelRatio.roundToNearestPixel(newSize));
+    } else {
+      return Math.round(PixelRatio.roundToNearestPixel(newSize)) + 2;
+    }
+  }
+  static winWidth = Dimensions.get('window').width;
+  static winHeight = Dimensions.get('window').height;
+}
+
+export default FontScale;

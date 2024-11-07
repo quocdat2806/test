@@ -1,9 +1,10 @@
 enum Routes {
-  POSTDETAIL = 'PostDetail',
-  HOME = 'home',
-  SHOPPINGCART = 'shoppingCart',
-  CHAT = 'chat',
-  VIDEO = 'video',
-  FRIEND = 'friend',
+  PostDetail = 'PostDetail',
+  Home = 'Home',
+  HomeStack = 'HomeStack',
+  ShoppingCart = 'ShoppingCart',
+  Chat = 'Chat',
+  Video = 'Video',
+  Friend = 'Friend',
 }
 export default Routes;
